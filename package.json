@@ -1,0 +1,30 @@
+{
+  "name": "higregory",
+  "version": "1.0.0",
+  "description": "Hi Gregory, this is a quick and simple API I wrote in node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://wutschkef42@github.com/wutschkef42/higregory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wutschkef42/higregory/issues"
+  },
+  "homepage": "https://github.com/wutschkef42/higregory#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.11"
+  }
+}
