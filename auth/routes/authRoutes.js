@@ -1,6 +1,5 @@
+
 'use strict';
-
-
 module.exports = function(app) {
     var verifyToken = require('../verifyToken');
     var auth = require('../controllers/authController');

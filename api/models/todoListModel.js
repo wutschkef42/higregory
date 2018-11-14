@@ -1,6 +1,4 @@
 
-// ADD DATA VALIDATION https://www.npmjs.com/package/fastest-validator
-
 'use strict';
 var	mongoose = require('mongoose');
 var	TaskSchema = new mongoose.Schema({
