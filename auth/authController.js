@@ -4,9 +4,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('Users');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
-var config = require('../../config');
-var VerifyToken = require('../verifyToken');
-
+var config = require('../config');
 
 /*
 exports.sign_up_user = function(req, res) {
