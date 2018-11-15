@@ -16,7 +16,6 @@ exports.list_all_lists = async (req, res) => {
 
 exports.create_a_list = async (req, res) => {
     try {
-        console.log(req.userId);
         const new_list = await List.create({
             owner_id: req.userId,
             tasks: []
@@ -28,9 +27,21 @@ exports.create_a_list = async (req, res) => {
     }
 }
 
+exports.delete_a_list = async (req, res) => {
+    try {
+        await List.remove({ _id: req.body.listId });
+        res.status(200).send('List has been deleted.');
+    }
+    catch (err) {
+        res.status(500).send({ error: err, message: 'Server error.' });
+    }
+}
+
 exports.read_a_list = async (req, res) => {
     try {
         const list = await List.findById(req.params.listId);
+       // if (list.owner_id != req.userId)
+        //    res.status(403).send('You are not authorized to see this list.');
         res.status(200).json(list);
     }
     catch (err) {
@@ -41,6 +52,9 @@ exports.read_a_list = async (req, res) => {
 exports.add_task_to_list = async (req, res) => {
     try {
         let task = await Task.create({ name: req.body.name });
+        let list = await List.findById(req.params.listId);
+        if (list.owner_id != req.userId)
+            res.status(403).send('You are not authorized to edit this list.');
         await List.findByIdAndUpdate(req.params.listId,
             { $push: { tasks: task } },
             { safe: true, upsert: true });
@@ -54,6 +68,9 @@ exports.add_task_to_list = async (req, res) => {
 exports.delete_task_from_list = async (req, res) => {
     try {
         let task = await Task.findById(req.body.taskId);
+        let list = await List.findById(req.params.listId);
+        if (list.owner_id != req.userId)
+            res.status(403).send('You are not authorized to edit this list.');
         if (!task) res.status(404).send('Task not found.');
         await List.findByIdAndUpdate(req.params.listId,
             { $pull: { tasks: task }},
