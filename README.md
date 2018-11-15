@@ -12,33 +12,55 @@ TodoLists have a one-to-many relationship with TodoItems. Each list contains an 
 ## Routes
 ### Authentication
 post `/register`
+
 request body must contain username, email and password. returns JWT.
+
 post `/login`
+
 request body must contain username and password. returns JWT.
+
 get `/logout`
+
 revokes JWT
 
 ### User
 get `/users`
+
 returns list of all users (should require admin privilege, not yet implemented)
+
 get `/users/:userId`
+
 returns a single user
+
 put `/users/:userId`
+
 updates a single user
+
 delete `/users/:userId`
+
 deletes a single user
 
 ### todoList
 get `/lists`
+
 returns all existing lists (should require admin privilege, not yet implemented)
+
 post `/lists` 
+
 creates a list owned by the requesting userID
+
 delete `/lists`
+
 deletes a list owned by the requesting userID
 
 get `/lists/:listId`
+
 reads a list
+
 post `/lists/:listId`
+
 request body must contain name of new todoItem. Adds item to list.
+
 delete `/lists/:listId`
+
 deletes item from list
