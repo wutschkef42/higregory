@@ -6,24 +6,6 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../config');
 
-/*
-exports.sign_up_user = function(req, res) {
-    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-
-    User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword
-    },
-    function(err, user) {
-        if (err) return res.status(500).send("Error: User not registered.")
-        var token = jwt.sign({ id: user._id  }, config.secret, {
-            expiresIn: 86400
-        });
-        res.status(200).send({ auth: true, token: token });
-    });
-};
-*/
 
 exports.sign_up_user = async (req, res) => {
     try {
@@ -44,21 +26,6 @@ exports.sign_up_user = async (req, res) => {
     }
 }
 
-
-/*
-exports.login_user = function(req, res) {
-    User.findOne({ email: req.body.email }, function(err, user) {
-        if (err) return res.status(500).send('Server error.');
-        if (!user) return res.status(404).send('User not found.');
-        var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-        if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
-        var token = jwt.sign({ id: user._id }, config.secret, {
-            expiresIn: 86400
-        });
-        res.status(200).send({ auth: true, token: token });
-    });
-};
-*/
 
 exports.login_user = async (req, res) => {
     try {
@@ -88,14 +55,3 @@ exports.who_am_i = (req, res) => {
             res.status(200).send({ user: user });
         });
 };
-
-/*
-router.get('/me', VerifyToken, function(req, res, next) {
-  User.findById(req.userId, { password: 0 }, function (err, user) {
-    if (err) return res.status(500).send("There was a problem finding the user.");
-    if (!user) return res.status(404).send("No user found.");
-    
-    res.status(200).send(user);
-  });
-});
-*/
