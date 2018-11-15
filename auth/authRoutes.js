@@ -1,7 +1,7 @@
 
 'use strict';
 module.exports = function(app) {
-    var verifyToken = require('./middleware/verifyToken');
+    var verifyToken = require('../middleware/verifyToken');
     var auth = require('./authController');
 
     app.route('/register')

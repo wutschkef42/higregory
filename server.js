@@ -7,14 +7,17 @@ var express = require('express'),
 	port = process.env.PORT || 3000,
 	Task = require('./api/todoItem/todoItemModel'),
 	User = require('./user/userModel'),
+	List = require('./api/todoList/todoListModel'),
 	db = require('./db'),
 	bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var todoListRoutes = require('./api/todoItem/todoItemRoutes');
+var todoListRoutes = require('./api/todoList/todoListRoutes');
 todoListRoutes(app);
+var todoItemRoutes = require('./api/todoItem/todoItemRoutes');
+todoItemRoutes(app);
 var authRoutes = require('./auth/authRoutes');
 authRoutes(app);
 var userRoutes = require('./user/userRoutes');
